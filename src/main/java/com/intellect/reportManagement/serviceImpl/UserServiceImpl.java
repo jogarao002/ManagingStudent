@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 		body.append("<br>");
 		body.append("Temporary password: " + password);
 		body.append("<br>");
-		body.append("<a href=\"http://localhost:8080/unlock?" + signUpForm.getUserEmail() + "\">Use this link to unlock your Account</a>");
+		body.append("<a href=\"http://localhost:8080/unlock?email=" + signUpForm.getUserEmail() + "\">Use this link to unlock your Account</a>");
 		body.append("<br>");
 		body.append("<br>");
 		body.append("Thanks,");

@@ -57,7 +57,10 @@
 				</div>
 			</div>
 		</nav>
-
+	</div>
+	<div>
+		<p th:text="${successMessage}" class = "text-danger"></p>
+		<p th:text="${errorMessage}" class = "text-danger"></p>
 		<form th:action="@{/register}" th:object="${signUpForm}" method="POST">
 			<!-- Success message -->
 			<!-- <div class="alert alert-success" th:if="${successMessage}">
