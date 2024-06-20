@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.intellect.reportManagement.binding.LoginForm;
 import com.intellect.reportManagement.binding.SignUpForm;
 import com.intellect.reportManagement.service.UserService;
 
@@ -24,7 +25,8 @@ public class IndexController {
 	}
 	
 	@GetMapping("/login")
-	public String getLoginPage() {
+	public String getLoginPage(Model model) {
+		model.addAttribute("login", new LoginForm());
 		return "login";
 	}
 	

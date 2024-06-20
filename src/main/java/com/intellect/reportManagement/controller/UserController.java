@@ -1,5 +1,8 @@
 package com.intellect.reportManagement.controller;
 
+import java.lang.ProcessBuilder.Redirect;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,10 +10,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.intellect.reportManagement.binding.LoginForm;
 import com.intellect.reportManagement.binding.UnlockForm;
+import com.intellect.reportManagement.service.UserService;
 
 @Controller
 public class UserController {
+
+	@Autowired
+	private UserService userService;
 
 	@GetMapping("/unlock")
 	public String getUnlockPage(@RequestParam String email, Model model) {
@@ -19,11 +27,23 @@ public class UserController {
 		model.addAttribute("unlock", unlockForm);
 		return "unlock";
 	}
-	
+
 	@PostMapping("/unlock")
-	public String unlockUserAccount(@ModelAttribute UnlockForm unlock, Model model) {
-		System.out.println(unlock);
+	public String unlockUserAccount(@ModelAttribute("unlock") UnlockForm unlock, Model model) {
+		// System.out.println(unlock);
+		String status = userService.getUnlockAccount(unlock);
+		model.addAttribute("msg", status);
 		return "unlock";
+	}
+
+	@PostMapping("/login")
+	public String loginPage(@ModelAttribute("login") LoginForm loginForm, Model model) {
+		String status = userService.getloginAccount(loginForm);
+		if (status != null && status.equals("Account logged successfully")) {
+			return "redirect:/dashBoard";
+		}
+		model.addAttribute("error", status);
+		return "login";
 	}
 
 }

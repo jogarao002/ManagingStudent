@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,26 +73,26 @@
 											<img src="images/logo.png" style="width: 185px;" alt="logo">
 											<h4 class="mt-1 mb-5 pb-1">We are The Jogarao Team</h4>
 										</div>
-
-										<form>
+										<p th:field="${error}" class = "text-danger"/>
+										<form th:action="@{/login}" th:object="${login}"
+											method="POST">
 											<p>Please login to your account</p>
 
 											<div data-mdb-input-init class="form-outline mb-4">
 												<label class="form-label" for="form2Example11">Username</label>
-												<input type="email" id="form2Example11" class="form-control"
-													placeholder="Phone number or email address" />
+												<input type="text" id="form2Example11" class="form-control"
+													placeholder="Phone number or email address" th:field="*{userEmail}" />
 											</div>
 
 											<div data-mdb-input-init class="form-outline mb-4">
 												<label class="form-label" for="form2Example22">Password</label>
 												<input type="password" id="form2Example22"
-													class="form-control" />
+													class="form-control" th:field="*{userPassword}" />
 											</div>
 
 											<div class="text-center pt-1 mb-5 pb-1">
-												<button data-mdb-button-init data-mdb-ripple-init
-													class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-													type="button">Log in</button>
+												<input type="submit" value="Log in" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"/>
+												
 												<br> <a class="text-muted" href="#!"> Forgot
 													password? </a>
 											</div>

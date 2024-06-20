@@ -9,11 +9,8 @@
 	rel="stylesheet">
 <style type="text/css">
 .gradient-custom-2 {
-	/* fallback for old browsers */
 	background: #fccb90;
-	/* Chrome 10-25, Safari 5.1-6 */
 	background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 }
 
@@ -57,7 +54,6 @@
 			</div>
 		</nav>
 		<br>
-
 		<section class="h-100 gradient-form" style="background-color: #eee;">
 			<div class="container py-5 h-100">
 				<div
@@ -71,34 +67,35 @@
 											<img src="images/logo.png" style="width: 185px;" alt="logo">
 											<h4 class="mt-1 mb-5 pb-1">We are The Jogarao Team</h4>
 										</div>
-
+										<p th:field="${msg}" class = "text-danger"/>
 										<form th:action="@{/unlock}" th:object="${unlock}"
 											method="POST">
 											<div class="form-outline mb-4">
 												<h6>
-													Your Email: <span th:text="${unlock.email}"></span>
+													Your Email: <span th:text="${unlock.userEmail}"></span>
 												</h6>
 											</div>
-
-											<div data-mdb-input-init class="form-outline mb-4">
+											<div class="form-outline mb-4">
+												 <input type="hidden" id="userEmail"
+													class="form-control" th:field="${unlock.userEmail}" />
+											</div>
+											<div class="form-outline mb-4">
 												<label class="form-label" for="temporaryPassword">Temporary
 													Password</label> <input type="text" id="temporaryPassword"
-													class="form-control" th:field="*{temporaryPassword}" />
+													class="form-control" th:field="*{temparoryPassword}" />
 											</div>
-											<div data-mdb-input-init class="form-outline mb-4">
+											<div class="form-outline mb-4">
 												<label class="form-label" for="newPassword">New
 													Password</label> <input type="password" id="newPassword"
 													class="form-control" th:field="*{newPassword}" />
 											</div>
-											<div data-mdb-input-init class="form-outline mb-4">
+											<div class="form-outline mb-4">
 												<label class="form-label" for="reenterPassword">Re-Enter
 													Password</label> <input type="password" id="reenterPassword"
 													class="form-control" th:field="*{rePassword}" />
 											</div>
 											<div class="text-center pt-1 mb-5 pb-1">
-												<button data-mdb-button-init data-mdb-ripple-init
-													class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-													type="submit">Unlock</button>
+												<input type="submit" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" value="Unlock"/>
 												<br> <a class="text-muted" href="#!">Forgot
 													password?</a>
 											</div>
@@ -108,7 +105,6 @@
 												<a href="login" class="btn btn-outline-danger">Login</a>
 											</div>
 										</form>
-
 									</div>
 								</div>
 								<div
