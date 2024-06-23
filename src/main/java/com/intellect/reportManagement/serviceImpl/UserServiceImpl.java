@@ -1,6 +1,7 @@
 package com.intellect.reportManagement.serviceImpl;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDtlsRepo userDtlsRepo;
+	
+	@Autowired
+	private HttpSession session;
 
 	@Override
 	public boolean getSignupDetails(SignUpForm signUpForm) throws MessagingException {
@@ -93,7 +97,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String getloginAccount(LoginForm loginForm) {
 		try {
-			UserDtlsEntity userDtlsEntity = userDtlsRepo.findByUserEmail(loginForm.getUserEmail());
+			UserDtlsEntity userDtlsEntity = userDtlsRepo.findByUserEmail(loginForm.getUserEmail().trim());
 
 			if (userDtlsEntity == null) {
 				return "Email id not correct";
@@ -107,7 +111,7 @@ public class UserServiceImpl implements UserService {
 				return "Email is there, but Account is locked. Please check your mail to unlock it";
 			}
 
-
+			session.setAttribute("userId", userDtlsEntity.getUserId());
 			return "Account logged successfully";
 		} catch (Exception e) {
 			e.printStackTrace(); 

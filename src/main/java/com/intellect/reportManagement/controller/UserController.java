@@ -1,6 +1,5 @@
 package com.intellect.reportManagement.controller;
 
-import java.lang.ProcessBuilder.Redirect;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,15 +34,25 @@ public class UserController {
 		model.addAttribute("msg", status);
 		return "unlock";
 	}
+	
+	@GetMapping("/forgotPwd")
+	public String forgetPwd() {
+		return "forgotPwd";
+	}
 
 	@PostMapping("/login")
 	public String loginPage(@ModelAttribute("login") LoginForm loginForm, Model model) {
-		String status = userService.getloginAccount(loginForm);
-		if (status != null && status.equals("Account logged successfully")) {
-			return "redirect:/dashBoard";
-		}
-		model.addAttribute("error", status);
-		return "login";
+	    try {
+	        String status = userService.getloginAccount(loginForm);
+	        if (status.equals("Account logged successfully")) {
+	            return "redirect:/dashboard"; 
+	        	//System.out.println("iam redirect to dashboard");
+	        }
+	        model.addAttribute("error", status);
+	    } catch (Exception e) {
+	        model.addAttribute("error", "Failed to login: " + e.getMessage());
+	    }
+	    return "login";
 	}
 
 }
