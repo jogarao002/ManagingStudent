@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,7 @@ import com.intellect.reportManagement.entity.StudentEnqEntity;
 import com.intellect.reportManagement.entity.UserDtlsEntity;
 import com.intellect.reportManagement.repository.CourseRepo;
 import com.intellect.reportManagement.repository.EnqStatusRepo;
+import com.intellect.reportManagement.repository.StudentEnqRepo;
 import com.intellect.reportManagement.repository.UserDtlsRepo;
 import com.intellect.reportManagement.service.EnquiryService;
 
@@ -24,12 +28,18 @@ public class EnquiryServiceImpl implements EnquiryService {
 
 	@Autowired
 	private UserDtlsRepo userDtlsRepo;
+	
+	@Autowired
+	private StudentEnqRepo studentEnqRepo;
 
 	@Autowired
 	private EnqStatusRepo enqStatusRepo;
 
 	@Autowired
 	private CourseRepo courseRepo;
+	
+	@Autowired
+	private HttpSession session;
 
 	@Override
 	public DashboardResponse getDashBoardDetails(Integer userId) {
@@ -42,10 +52,10 @@ public class EnquiryServiceImpl implements EnquiryService {
 			List<StudentEnqEntity> studentEnquiries = userDtlsEntity.getStudentEnquiries();
 			Integer totalCount = studentEnquiries.size();
 
-			Integer entrolledCount = studentEnquiries.stream().filter(e -> e.getEnquaryStatus().equals("ENTROLLED"))
+			Integer entrolledCount = studentEnquiries.stream().filter(e -> e.getCourseStatus().equals("ENTROLLED"))
 					.collect(Collectors.toList()).size();
 
-			Integer lostCount = studentEnquiries.stream().filter(e -> e.getEnquaryStatus().equals("LOST"))
+			Integer lostCount = studentEnquiries.stream().filter(e -> e.getCourseStatus().equals("LOST"))
 					.collect(Collectors.toList()).size();
 
 			response.setTotalCount(totalCount);
@@ -78,7 +88,17 @@ public class EnquiryServiceImpl implements EnquiryService {
 
 	@Override
 	public boolean saveEnquriry(EnquiryForm form) {
-		return false;
+		
+		StudentEnqEntity studentEnqEntity = new StudentEnqEntity();
+		BeanUtils.copyProperties(form, studentEnqEntity);
+		
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		UserDtlsEntity userDtlsEntity = userDtlsRepo.findById(userId).get();
+		
+		studentEnqEntity.setUser(userDtlsEntity);
+		studentEnqRepo.save(studentEnqEntity);
+		return true;
 	}
 
 }

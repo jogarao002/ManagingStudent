@@ -56,8 +56,9 @@
 									<div class="text-center">
 										<h4 class="mt-1 mb-5 pb-1">Add Student Enquriy Here</h4>
 									</div>
-
-									<form th:action="@{/addEnq}" th:object="${formObj}" method="POST">
+									<p th:field="${success}" class = "text-success"/>
+									<p th:field="${error}" class = "text-danger"/>
+									<form th:action="@{/addEnquiry}" th:object="${formObj}" method="POST">
 										<div class="form-outline mb-4">
 											<input type="text" id="form2Example11" class="form-control"
 												placeholder="Student Name" th:field="*{userName}"/> <label class="form-label"
@@ -99,7 +100,7 @@
 										<div class="text-center pt-1 mb-5 pb-1">
 											<button
 												class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-												type="button">Submit</button>
+												type="submit">Submit</button>
 										</div>
 
 

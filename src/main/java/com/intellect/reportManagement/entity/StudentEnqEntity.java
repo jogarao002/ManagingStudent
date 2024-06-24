@@ -8,10 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ManyToAny;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 
 @Entity
 @Table(name = "STUDENT_ENQUARY_ENTITY")
@@ -21,18 +22,20 @@ public class StudentEnqEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer studentEnquaryId;
 	
-	private String studentName;
+	private String userName;
 	
-	private String phoneNumber;
+	private String userPhoneNumber;
 	
 	private String classMode;
 	
-	private String courseName;
+	private String course;
 	
-	private String enquaryStatus;
+	private String courseStatus;
 	
+	@CreationTimestamp
 	private LocalDate createdDate;
 	
+	@UpdateTimestamp
 	private LocalDate updatedDate;
 	
 	@ManyToOne
@@ -47,21 +50,7 @@ public class StudentEnqEntity {
 		this.studentEnquaryId = studentEnquaryId;
 	}
 
-	public String getStudentName() {
-		return studentName;
-	}
-
-	public void setStudentName(String studentName) {
-		this.studentName = studentName;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+	
 
 	public String getClassMode() {
 		return classMode;
@@ -69,22 +58,6 @@ public class StudentEnqEntity {
 
 	public void setClassMode(String classMode) {
 		this.classMode = classMode;
-	}
-
-	public String getCourseName() {
-		return courseName;
-	}
-
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
-
-	public String getEnquaryStatus() {
-		return enquaryStatus;
-	}
-
-	public void setEnquaryStatus(String enquaryStatus) {
-		this.enquaryStatus = enquaryStatus;
 	}
 
 	public LocalDate getCreatedDate() {
@@ -110,14 +83,45 @@ public class StudentEnqEntity {
 	public void setUser(UserDtlsEntity user) {
 		this.user = user;
 	}
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserPhoneNumber() {
+		return userPhoneNumber;
+	}
+
+	public void setUserPhoneNumber(String userPhoneNumber) {
+		this.userPhoneNumber = userPhoneNumber;
+	}
+
+	public String getCourse() {
+		return course;
+	}
+
+	public void setCourse(String course) {
+		this.course = course;
+	}
+
+	public String getCourseStatus() {
+		return courseStatus;
+	}
+
+	public void setCourseStatus(String courseStatus) {
+		this.courseStatus = courseStatus;
+	}
 
 	@Override
 	public String toString() {
-		return "StudentEnqEntity [studentEnquaryId=" + studentEnquaryId + ", studentName=" + studentName
-				+ ", phoneNumber=" + phoneNumber + ", classMode=" + classMode + ", courseName=" + courseName
-				+ ", enquaryStatus=" + enquaryStatus + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate
+		return "StudentEnqEntity [studentEnquaryId=" + studentEnquaryId + ", userName=" + userName
+				+ ", userPhoneNumber=" + userPhoneNumber + ", classMode=" + classMode + ", course=" + course
+				+ ", courseStatus=" + courseStatus + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate
 				+ ", user=" + user + "]";
 	}
 
-	
 }

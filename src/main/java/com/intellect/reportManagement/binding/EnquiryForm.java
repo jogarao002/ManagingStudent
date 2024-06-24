@@ -14,11 +14,6 @@ public class EnquiryForm {
 	
 	private String courseStatus;
 	
-
-	private LocalDate createdOn;
-	
-	private LocalDate modifiedOn;
-
 	public String getUserName() {
 		return userName;
 	}
@@ -59,26 +54,10 @@ public class EnquiryForm {
 		this.courseStatus = courseStatus;
 	}
 
-	public LocalDate getCreatedOn() {
-		return createdOn;
-	}
-
-	public void setCreatedOn(LocalDate createdOn) {
-		this.createdOn = createdOn;
-	}
-
-	public LocalDate getModifiedOn() {
-		return modifiedOn;
-	}
-
-	public void setModifiedOn(LocalDate modifiedOn) {
-		this.modifiedOn = modifiedOn;
-	}
-
 	@Override
 	public String toString() {
 		return "EnquiryForm [userName=" + userName + ", userPhoneNumber=" + userPhoneNumber + ", classMode=" + classMode
-				+ ", course=" + course + ", courseStatus=" + courseStatus + ", createdOn=" + createdOn + ", modifiedOn="
-				+ modifiedOn + "]";
+				+ ", course=" + course + ", courseStatus=" + courseStatus + "]";
 	}
+	
 }
