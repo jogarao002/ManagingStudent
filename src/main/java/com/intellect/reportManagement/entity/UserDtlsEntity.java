@@ -29,7 +29,7 @@ public class UserDtlsEntity {
 	
 	private String accountStatus;
 	
-	@OneToMany(mappedBy = "studentEnquaryId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<StudentEnqEntity> studentEnquiries;
 
 	public Integer getUserId() {

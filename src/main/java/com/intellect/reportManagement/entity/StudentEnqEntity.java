@@ -7,8 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
 
 @Entity
 @Table(name = "STUDENT_ENQUARY_ENTITY")
@@ -31,6 +34,10 @@ public class StudentEnqEntity {
 	private LocalDate createdDate;
 	
 	private LocalDate updatedDate;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private UserDtlsEntity user;
 
 	public Integer getStudentEnquaryId() {
 		return studentEnquaryId;
@@ -96,12 +103,21 @@ public class StudentEnqEntity {
 		this.updatedDate = updatedDate;
 	}
 
+	public UserDtlsEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserDtlsEntity user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "StudentEnqEntity [studentEnquaryId=" + studentEnquaryId + ", studentName=" + studentName
 				+ ", phoneNumber=" + phoneNumber + ", classMode=" + classMode + ", courseName=" + courseName
 				+ ", enquaryStatus=" + enquaryStatus + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate
-				+ "]";
+				+ ", user=" + user + "]";
 	}
+
 	
 }

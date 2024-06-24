@@ -12,5 +12,8 @@ public interface UserService {
 
 	String getUnlockAccount(UnlockForm unlock);
 
-	String getloginAccount(LoginForm loginForm); 
+	String getloginAccount(LoginForm loginForm);
+
+	boolean getForgotPassword(String email) throws MessagingException; 
+	
 }

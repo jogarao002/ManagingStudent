@@ -119,4 +119,37 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public boolean getForgotPassword(String email) throws MessagingException {
+		UserDtlsEntity userDtlsEntity = userDtlsRepo.findByUserEmail(email);
+		if(null != userDtlsEntity) {
+			
+			String to = email;
+			String password = userDtlsEntity.getUserPassword();
+			
+			String subject = "forgot password";
+			StringBuilder body = new StringBuilder();
+			body.append("<h2>Hi " + userDtlsEntity.getUserName() + "</h2>");
+			body.append("<br>");
+			body.append("<h3>Below is your password</h3>");
+			body.append("<br>");
+			body.append("Your password: " + password);
+			body.append("<br>");
+			body.append("<br>");
+			body.append("Thanks,");
+			body.append("<br>");
+			body.append("B.Jogarao.");
+
+			boolean sendEmail = emailUtil.sendEmail(to, subject, body.toString());
+			
+			if(sendEmail) {
+				return true;
+			}
+			
+		} 
+		return false;
+	}
+	
+	
+
 }

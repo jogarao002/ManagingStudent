@@ -1,6 +1,9 @@
 package com.intellect.reportManagement.controller;
 
 
+import javax.mail.MessagingException;
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +40,18 @@ public class UserController {
 	
 	@GetMapping("/forgotPwd")
 	public String forgetPwd() {
+		return "forgotPwd";
+	}
+	
+	@PostMapping("/forgotPassword")
+	public String forgotPassword(@RequestParam("email") String email, Model model) throws MessagingException {
+		//System.out.println(email);
+		boolean status = userService.getForgotPassword(email);
+		if(status) {
+			model.addAttribute("success", "Check your mail");
+		} else {
+			model.addAttribute("error", "inavalid email");
+		}
 		return "forgotPwd";
 	}
 

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
-<title>Ashok IT - Enquiry</title>
+<title>Enquiry</title>
 <!-- MDB icon -->
 <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
 <!-- Font Awesome -->
@@ -57,44 +57,42 @@
 										<h4 class="mt-1 mb-5 pb-1">Add Student Enquriy Here</h4>
 									</div>
 
-									<form>
+									<form th:action="@{/addEnq}" th:object="${formObj}" method="POST">
 										<div class="form-outline mb-4">
-											<input type="email" id="form2Example11" class="form-control"
-												placeholder="Student Name" /> <label class="form-label"
+											<input type="text" id="form2Example11" class="form-control"
+												placeholder="Student Name" th:field="*{userName}"/> <label class="form-label"
 												for="form2Example11">Student Name</label>
 										</div>
 
 										<div class="form-outline mb-4">
-											<input type="email" id="form2Example11" class="form-control"
-												placeholder="Student Name" /> <label class="form-label"
+											<input type="text" id="form2Example11" class="form-control"
+												placeholder="Student Name" th:field="*{userPhoneNumber}"/> <label class="form-label"
 												for="form2Example11">Contact Number</label>
 										</div>
 
 										<div class="form-outline mb-4">
 											<label class="form-label" for="form2Example22">Class
-												Mode</label> <select id="form2Example22" class="form-select">
-												<option>-Select-</option>
-												<option>Online</option>
-												<option>Classroom</option>
+												Mode</label> <select id="form2Example22" class="form-select" th:field="*{classMode}">
+												<option value="">-Select-</option>
+												<option value="Online">Online</option>
+												<option value="Classroom">Classroom</option>
 											</select>
 										</div>
 
 										<div class="form-outline mb-4">
 											<label class="form-label" for="form2Example22">Course</label>
-											<select id="form2Example22" class="form-select">
-												<option>-Select-</option>
-												<option selected>Java Fullstack</option>
-												<option>DevOps</option>
-												<option>AWS</option>
+											<select id="form2Example22" class="form-select" th:field="*{course}">
+												<option value = "" >-Select-</option>
+												<option th:each="course : ${courses}" th:value="${course}" th:text= "${course}"></option>
+												
 											</select>
 										</div>
 										<div class="form-outline mb-4">
 											<label class="form-label" for="form2Example22">Enquiry
-												Status</label> <select id="form2Example22" class="form-select">
-												<option>-Select-</option>
-												<option selected>New</option>
-												<option>Enrolled</option>
-												<option>Lost</option>
+												Status</label> <select id="form2Example22" class="form-select" th:field="*{courseStatus}">
+												<option value="">-Select-</option>
+												<option th:each="status : ${status}" th:value="${status}" th:text= "${status}"></option>
+												
 											</select>
 										</div>
 
