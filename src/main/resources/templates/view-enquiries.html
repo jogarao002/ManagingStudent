@@ -6,7 +6,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
-<title>Ashok IT - View Enquries</title>
+<title>View Enquries</title>
 <!-- MDB icon -->
 <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
 <!-- Font Awesome -->
@@ -60,21 +60,17 @@
 									<div class="row">
 										<div class="col-md-4 form-outline mb-4">
 											<label class="form-label" for="form2Example22">Course
-											</label> <select id="form2Example22" class="form-select">
-												<option>-Select-</option>
-												<option>Java Fullstack</option>
-												<option>DevOps</option>
-												<option>AWS</option>
+											</label> <select id="form2Example22" class="form-select" th:field="*{course}">
+												<option value = "" >-Select-</option>
+												<option th:each="course : ${courses}" th:value="${course}" th:text= "${course}"></option>
 											</select>
 										</div>
 
 										<div class="col-md-4 form-outline mb-4">
 											<label class="form-label" for="form2Example22">Enquiry
-												Status</label> <select id="form2Example22" class="form-select">
-												<option>-Select-</option>
-												<option>New</option>
-												<option>Enrolled</option>
-												<option>Lost</option>
+												Status</label> <select id="form2Example22" class="form-select" th:field="*{courseStatus}">
+												<option value="">-Select-</option>
+												<option th:each="status : ${status}" th:value="${status}" th:text= "${status}"></option>
 											</select>
 										</div>
 
@@ -82,9 +78,9 @@
 										<div class="col-md-4 form-outline mb-4">
 											<label class="form-label" for="form2Example22">Class
 												Mode </label> <select id="form2Example22" class="form-select">
-												<option>-Select-</option>
-												<option>Online</option>
-												<option>Classroom</option>
+												<option value = "">-Select-</option>
+												<option value = "Online">Online</option>
+												<option value = "Classroom">Classroom</option>
 											</select>
 										</div>
 
@@ -106,35 +102,18 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<th scope="row">1</th>
-												<td>Mark</td>
-												<td>Java Fullsack</td>
-												<td>+91 - 79797979</td>
-												<td>13-Mar-2023</td>
-												<td>New</td>
-												<td><a href="enquiry" class="btn btn-primary">Edit</a></td>
-											</tr>
-											<tr>
-												<th scope="row">2</th>
-												<td>Steve</td>
-												<td>DevOps</td>
-												<td>+91 - 79797979</td>
-												<td>12-Mar-2023</td>
-												<td>Enrolled</td>
-												<td><a href="enquiry" class="btn btn-primary">Edit</a></td>
-											</tr>
-											<tr>
-												<th scope="row">3</th>
-												<td>David</td>
-												<td>React JS</td>
-												<td>+91 - 79797979</td>
-												<td>11-Mar-2023</td>
-												<td>Lost</td>
-												<td><a href="enquiry" class="btn btn-primary">Edit</a></td>
+											<tr th:each="entity, iterStat : ${data}">
+												<td th:text="${iterStat.index + 1}"></td>
+												<td th:text="${entity.name}"></td>
+												<td th:text="${entity.course}"></td>
+												<td th:text="${entity.number}"></td>
+												<td th:text="${entity.enquiryDate}"></td>
+												<td th:text="${entity.status}"></td>
+												<td><a th:href="@{/enquiry}" class="btn btn-primary">Edit</a></td>
 											</tr>
 										</tbody>
 									</table>
+
 
 								</div>
 							</div>

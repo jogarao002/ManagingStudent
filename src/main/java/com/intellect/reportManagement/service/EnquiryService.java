@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.intellect.reportManagement.binding.DashboardResponse;
 import com.intellect.reportManagement.binding.EnquiryForm;
+import com.intellect.reportManagement.entity.UserDtlsEntity;
 
 public interface EnquiryService {
 
@@ -14,5 +15,7 @@ public interface EnquiryService {
 	List<String> getCourseStatus();
 	
 	boolean saveEnquriry(EnquiryForm form);
+
+	List<UserDtlsEntity> getAllEnquiries(Integer userId);
 	
 }

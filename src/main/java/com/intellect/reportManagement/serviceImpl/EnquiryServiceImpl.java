@@ -101,4 +101,13 @@ public class EnquiryServiceImpl implements EnquiryService {
 		return true;
 	}
 
+	@Override
+	public List<UserDtlsEntity> getAllEnquiries(Integer userId) {
+	    if (userId != null) {
+	        return userDtlsRepo.findByStudentEnquiries(userId);
+	    }
+	    return null;
+	}
+
+
 }

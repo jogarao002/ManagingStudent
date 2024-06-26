@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.intellect.reportManagement.binding.DashboardResponse;
 import com.intellect.reportManagement.binding.EnquiryForm;
+import com.intellect.reportManagement.entity.UserDtlsEntity;
 import com.intellect.reportManagement.service.EnquiryService;
 
 @Controller
@@ -72,7 +73,11 @@ public class EnquiryController {
 	}
 
 	@GetMapping("/enquires")
-	public String viewEnquiry() {
+	public String viewEnquiry(Model model) {
+		init(model);
+		Integer userId = (Integer) session.getAttribute("userId");
+		List<UserDtlsEntity> entity = enquiryService.getAllEnquiries(userId);
+		model.addAttribute("data", entity);
 		return "view-enquiries";
 	}
 }
