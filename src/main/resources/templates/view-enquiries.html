@@ -60,7 +60,7 @@
 									<div class="row">
 										<div class="col-md-4 form-outline mb-4">
 											<label class="form-label" for="form2Example22">Course
-											</label> <select id="form2Example22" class="form-select" th:field="*{course}">
+											</label> <select id="form2Example22" class="form-select" th:field="*{entity.course}">
 												<option value = "" >-Select-</option>
 												<option th:each="course : ${courses}" th:value="${course}" th:text= "${course}"></option>
 											</select>
@@ -104,11 +104,11 @@
 										<tbody>
 											<tr th:each="entity, iterStat : ${data}">
 												<td th:text="${iterStat.index + 1}"></td>
-												<td th:text="${entity.name}"></td>
+												<td th:text="${entity.userName}"></td>
 												<td th:text="${entity.course}"></td>
-												<td th:text="${entity.number}"></td>
-												<td th:text="${entity.enquiryDate}"></td>
-												<td th:text="${entity.status}"></td>
+												<td th:text="${entity.userPhoneNumber}"></td>
+												<td th:text="${entity.createdDate}"></td>
+												<td th:text="${entity.courseStatus}"></td>
 												<td><a th:href="@{/enquiry}" class="btn btn-primary">Edit</a></td>
 											</tr>
 										</tbody>

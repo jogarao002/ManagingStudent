@@ -102,11 +102,15 @@ public class EnquiryServiceImpl implements EnquiryService {
 	}
 
 	@Override
-	public List<UserDtlsEntity> getAllEnquiries(Integer userId) {
-	    if (userId != null) {
-	        return userDtlsRepo.findByStudentEnquiries(userId);
-	    }
-	    return null;
+	public List<StudentEnqEntity> getAllEnquiries() {
+		Integer userId = (Integer)session.getAttribute("userId");
+		Optional<UserDtlsEntity> optUserDtlsEntity = userDtlsRepo.findById(userId);
+		if(optUserDtlsEntity.isPresent()) {
+			UserDtlsEntity userDtlsEntity = optUserDtlsEntity.get();
+			List<StudentEnqEntity> studentEnquiries = userDtlsEntity.getStudentEnquiries();
+			return studentEnquiries;
+		}
+		return null;
 	}
 
 
