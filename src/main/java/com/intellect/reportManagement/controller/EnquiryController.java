@@ -77,7 +77,7 @@ public class EnquiryController {
 	public String viewEnquiry(Model model) {
 		init(model);
 		List<StudentEnqEntity> entity = enquiryService.getAllEnquiries();
-		model.addAttribute("data", entity);
+		model.addAttribute("entity", entity);
 		return "view-enquiries";
 	}
 }
